@@ -1,22 +1,19 @@
-def rob(arr):
-    max = 0
-    sum = 0
-
-    for i in range(0, len(arr), 2):
-        sum = sum + arr[i]
-
-    if max < sum:
-        max = sum
-
-    sum = 0
+def rob(arr, i, n):
     
-    for i in range(1, len(arr), 2):
-        sum = sum + arr[i]
+    if i+2 >= n:
+        return 0, 0
+    
+    temp = arr[i]
+    for j in range(i+2, n):
+        further_max = rob(arr[j:], j, n)[0]
+        sum = temp + further_max
+        
 
-    if max < sum:
-        max = sum
+    excluding_max = rob(arr[i:], i, n)[1]
+    overall_max = max(sum, excluding_max)
 
-    return max
+    return sum, overall_max
+
 
 arr = [1, 2, 3, 1]
-print(rob(arr))
+print(rob(arr, 0, len(arr)))

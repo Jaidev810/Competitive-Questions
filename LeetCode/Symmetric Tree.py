@@ -58,21 +58,24 @@ def printLevelwise(root):
         print()
 
 
-def helper(root):
-    if root is None:
-        return
-    return root
-
-
 def SymmetricTree(root):
     if root is None:
         return True
-        
-    SymmetricTree(root.left)
-    SymmetricTree(root.right)
-    if root.left.data == root.right.data:
+    else:
+        return helper(root.left, root.right)
+
+def helper(root1, root2):
+    if root1 is None and root2 is None:
         return True
-    return False
+    if root1 is None or root2 is None:
+        return False
+
+    if root1.data == root2.data:
+        ltree = helper(root1.left, root2.right)
+        rtree = helper(root1.right, root2.left)
+        return ltree and rtree
+    else:
+        return False
     
 
     

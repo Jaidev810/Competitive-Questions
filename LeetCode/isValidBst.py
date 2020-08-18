@@ -51,35 +51,14 @@ def printLevelwise(root):
         print()
 
 
+def helper(root, left, right):
+    
+
 def isValidBst(root):
     if root is None:
         return True
-    if root.left is None and root.right is None:
-        return True
-
-    temp = root.data
-    ltree = isValidBst(root.left)
-    if ltree:
-        if root.left is not None and root.left.data < root.data and root.left.data < temp:
-            rtree = isValidBst(root.right)
-            if rtree:
-                if root.right is not None and root.right.data > root.data and root.right.data > temp:
-                    return True
-                elif root.right is None:
-                    return True
-                else:
-                    return False
-        elif root.left is None:
-            rtree = isValidBst(root.right)
-            if rtree:
-                if root.right is not None and root.right.data > root.data and root.right.data > temp:
-                    return True
-                elif root.right is None:
-                    return True
-                else:
-                    return False
-        else:
-            return False
+    else:
+        return helper(root, root.left, root.right)    
 
 
 root = takeLevelwiseinput()
