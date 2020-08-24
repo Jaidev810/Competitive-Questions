@@ -56,21 +56,16 @@ def printLevelwise(root):
         print()
 
 
-def helper(root, isLeft):
-
+def SumofLeftLeaf(root, isLeft=False):
     if root:
         if root.left is None and root.right is None and isLeft:
-            arr.append(root.data)
-
+            sum = sum + root.data
         
-            
-def SumofLeftLeaf(root):
-    if root is None:
-        return 0
-
-    ltree = helper(root.left, True)
-    rtree = helper(root.right, False)
+        ltree = SumofLeftLeaf(root.left, True)
+        rtree = SumofLeftLeaf(root.right, False)
+    return sum
 
 root = takeLevelwiseinput()
 printLevelwise(root)
+sum = 0
 print(SumofLeftLeaf(root))
