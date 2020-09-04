@@ -19,7 +19,7 @@ def search2Dmatrix(arr, target):
 
 
 
-arr = [[1]]
-target = 1
+arr = [[1, 4, 7, 11, 15], [2, 5, 8, 12, 19], [3, 6, 9, 22], [10, 13, 14, 17, 24], [18, 21, 23, 26, 30]]
+target = 5
 flag = search2Dmatrix(arr, target)
 print(flag)
