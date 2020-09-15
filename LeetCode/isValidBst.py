@@ -51,15 +51,23 @@ def printLevelwise(root):
         print()
 
 
-def helper(root, left, right):
-    
-
 def isValidBst(root):
-    if root is None:
-        return True
-    else:
-        return helper(root, root.left, root.right)    
 
+    if not root:
+        return True
+
+    stack = [(root, float('-inf'), float('inf')), ]
+    while stack:
+        root, lower, upper = stack.pop()
+        if not root:
+            continue
+        val = root.data
+        if val <= lower or val >= upper:
+            return False
+        stack.append((root.right, val, upper))
+        stack.append((root.left, lower, val))
+
+    return True
 
 root = takeLevelwiseinput()
 printLevelwise(root)
