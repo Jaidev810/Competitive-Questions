@@ -41,28 +41,22 @@ def length(head):
         head = head.next
     return count
 
-def intersectionLL(list1, list2):
-    temp1 = list1
-    temp2 = list2
-    ans  = 0
-    address = dict()
-    ll1 = length(list1)
-    ll2 = length(list2)
-
-    for i in range(ll1):
-        address[temp1] = temp1.data
-        temp1 = temp1.next
-
-    print(address)
-    for i in range(ll2):
-        print(temp2)
-        if temp2.data in address.values():
-            ans = temp2.data
-            break
-        temp2 = temp2.next
-
-
-    return ans
+def intersectionLL(headA, headB):
+    c1 = length(headA)
+    c2 = length(headB)
+        
+    if c1 < c2:                    
+        for _ in range(c2 - c1):
+            headB = headB.next
+    else:
+        for _ in range(c1 - c2):
+            headA = headA.next            
+        
+    while headA is not headB:
+        headA = headA.next
+        headB = headB.next                
+        
+    return headA
 
 
 head1 = takeInput()
