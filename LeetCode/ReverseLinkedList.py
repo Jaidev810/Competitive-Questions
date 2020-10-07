@@ -27,47 +27,48 @@ def printlist(head):
     print('None')
 
 
-def reverse(head):
-    if head is None:
-        return None
-    if head.next is None:
-        return head,head
-    smallh, smallt = reverse(head.next)
-    smallt.next = head
-    head.next = None
-    return smallh, head
-
-def reverseLL(head, m, n):
-    if head is None or head.next is None:
-        return head
-    i = 1
-    temp = head
+def get_ele(head, n):
     prev = None
-    while i < m:
+    temp = head
+    while n > 1:
         prev = temp
         temp = temp.next
-        i += 1
-    h1 = temp
-    i = 1
-    temp = None
-    curr = head
-    while i <= n and curr is not None:
-        temp = curr
-        curr = curr.next
-        i += 1
+        n -= 1
 
-    temp.next = None
-    h2, tail = reverse(h1)
-    prev.next = h2
-    tail.next = curr
+    return prev, temp
+
+def reverse(head):
+    if head == None or head.next is None:
+        return head, head
+    smallhead, smalltail = reverse(head.next)
+    smalltail.next = head
+    head.next = None
+    return smallhead, head
+
+
+def reverseLL(head, m, n):
+    if m >= n:
+        return head
+    if head is None or head.next is None:
+        return head
+    if m != 1:  
+        prev1, cur1 = get_ele(head, m)
+        prev2, cur2 = get_ele(head, n)
+        temp = cur2.next
+        cur2.next = None
+        new_head, new_tail = reverse(cur1)
+        prev1.next = new_head
+        new_tail.next = temp
+    else:
+        prev2, cur2 = get_ele(head, n)
+        temp = cur2.next
+        cur2.next = None
+        new_head, new_tail = reverse(head)
+        new_tail.next = temp
+        head = new_head
     return head
 
 
-
-
 head = takeInput()
-printlist(head)
-# newhead, t = reverse(head)
-# printlist(newhead)
-newhead = reverseLL(head, 1, 1)
-printlist(newhead)
+new_head = reverseLL(head, 1, 4)
+printlist(new_head)
