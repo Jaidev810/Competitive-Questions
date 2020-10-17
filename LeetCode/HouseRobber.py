@@ -1,19 +1,18 @@
-def rob(arr, i, n):
+def rob(arr):
+    maxele = arr[0]
+
+    for i in range(2, len(arr), 2):
+        sum = arr[i-2] +arr[i]
+        maxele = max(sum, maxele)
     
-    if i+2 >= n:
-        return 0, 0
-    
-    temp = arr[i]
-    for j in range(i+2, n):
-        further_max = rob(arr[j:], j, n)[0]
-        sum = temp + further_max
-        
+    for i in range(1, len(arr), 2):
+        sum = arr[i-2] + arr[i]
+        maxele = max(sum, maxele)
 
-    excluding_max = rob(arr[i:], i, n)[1]
-    overall_max = max(sum, excluding_max)
-
-    return sum, overall_max
+    return maxele
 
 
-arr = [1, 2, 3, 1]
-print(rob(arr, 0, len(arr)))
+
+arr = [2, 1, 1, 2]
+maxele = rob(arr)
+print(maxele)
