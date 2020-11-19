@@ -9,18 +9,15 @@ def fibproduct(pro):
         dp[i] = dp[i-1] + dp[i-2]
         product = dp[i-1]*dp[i-2]
         if product == pro:
-            arr.append(dp[i-1])
             arr.append(dp[i-2])
-            arr.append("True")
-            print(i)
+            arr.append(dp[i-1])
+            arr.append(True)
             break
         elif product > pro:
-            arr.append(dp[i-1])
             arr.append(dp[i-2])
-            arr.append("False")
-            print(i)
+            arr.append(dp[i-1])
+            arr.append(False)
             break
-
     return arr
 
 
